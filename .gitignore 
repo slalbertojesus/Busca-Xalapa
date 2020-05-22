@@ -1,0 +1,6 @@
+node_modules/
+data/
+.npm
+.env
+.DS_Store
+.docker-compose.yml
