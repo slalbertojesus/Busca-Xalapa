@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:14.3
 
 RUN mkdir /buscaxalapa
 
@@ -6,10 +6,10 @@ WORKDIR /buscaxalapa
 
 COPY package.json /buscaxalapa/
 
-RUN npm install
+RUN yarn install
 
 COPY . /buscaxalapa/
 
-EXPOSE 57937
+EXPOSE 8000
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
