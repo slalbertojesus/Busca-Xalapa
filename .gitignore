@@ -3,4 +3,4 @@ data
 .npm
 .env
 .DS_Store
-.docker-compose.yml
+docker-compose.yml
