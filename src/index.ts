@@ -17,6 +17,8 @@ const main = async () => {
     username: "dbadmin",
     password: "v37MTecfd8T3Ge3G",
     database: "busca_xalapa_db",
+    logging: true,
+    synchronize: true,
     entities: [__dirname + "/**/*.*"],
   }).catch((error) => console.log("Data Access Error : ", error));
 
