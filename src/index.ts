@@ -1,4 +1,4 @@
-import * as Express from "express";
+import Express from "express";
 import { buildSchema } from "type-graphql";
 import { RegisterResolver } from "./modules/user/UserDAO";
 import { createConnection } from "typeorm";
@@ -20,13 +20,17 @@ const main = async () => {
     logging: true,
     synchronize: true,
     entities: [__dirname + "/**/*.*"],
-  }).catch((error) => console.log("Data Access Error : ", error));
+  }).catch((error) =>
+    console.log("Hubo un error con la base de datos : ", error)
+  );
 
   const schema = await buildSchema({
     resolvers: [RegisterResolver],
   });
 
-  const apolloServer = new ApolloServer({ schema });
+  const apolloServer = new ApolloServer({
+    schema,
+  });
   const app = Express();
 
   apolloServer.applyMiddleware({ app });
