@@ -4,6 +4,9 @@ import { RegisterResolver } from "./modules/user/UserDAO";
 import { createConnection } from "typeorm";
 import { ApolloServer } from "apollo-server-express";
 import "reflect-metadata";
+import session from "express-session";
+import connectRedis from "connect-redis";
+import { redis } from "./redis";
 
 const puerto = 8000;
 
@@ -33,7 +36,26 @@ const main = async () => {
   });
   const app = Express();
 
+  const RedisStore = connectRedis(session);
+
   apolloServer.applyMiddleware({ app });
+
+  app.use(
+    session({
+      store: new RedisStore({
+        client: redis as any,
+      }),
+      name: "qid",
+      secret: "aslkdfjoiq12312",
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years
+      },
+    })
+  );
 
   app.listen(8000, () => {
     console.log("__dirname: " + __dirname);
