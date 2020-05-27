@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/co": "^4.6.2",
     "@types/connect-redis": "^0.0.14",
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.6",
